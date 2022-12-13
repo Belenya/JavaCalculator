@@ -13,8 +13,7 @@ public class Main {
         Scanner scanner= new Scanner(System.in);
         for(;;)
         {
-            var string = scanner.nextLine();
-            System.out.println(calc(string));
+            System.out.println(calc( scanner.nextLine()));
         }
     }
 
@@ -34,6 +33,10 @@ public class Main {
         }
         else
         {
+            if ((roman.indexOf(a) + 1 < roman.indexOf(b) + 1) && operation.equals("-"))
+            {
+                throw new IOException("В римской системе нет отрицательных чисел.");
+            }
             var result = doCalc(roman.indexOf(a) + 1, roman.indexOf(b) + 1, operation);
             return arabicToRoman(result);
         }
@@ -60,6 +63,7 @@ public class Main {
         }
         return result;
     }
+
     public static void isCorrectOperation(String operation) throws IOException
     {
         if (!operations.contains(operation))
@@ -85,11 +89,6 @@ public class Main {
         }
         else if (roman.contains(a) && roman.contains(b))
         {
-            if (roman.indexOf(a) + 1 < roman.indexOf(b) + 1)
-            {
-                throw new IOException("В римской системе нет отрицательных чисел.");
-
-            }
         }
         else
         {
@@ -101,6 +100,7 @@ public class Main {
     {
         return arabic.contains(a);
     }
+
     public static String arabicToRoman(int num)
     {
         if (num >= 4000 || num <= 0)
